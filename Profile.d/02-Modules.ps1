@@ -1,7 +1,7 @@
 $optionalModules = @(
     'PSReadLine'
-    'ExchangeOnlineManagement'
-    'Microsoft.Graph'
+    # 'ExchangeOnlineManagement'
+    # 'Microsoft.Graph'
 )
 
 foreach ($moduleName in $optionalModules) {

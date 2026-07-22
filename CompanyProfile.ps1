@@ -1,5 +1,10 @@
 Set-StrictMode -Version Latest
 
+# Initialize global variables for the framework
+if (-not (Test-Path variable:global:prefix)) {
+    $global:prefix = ""
+}
+
 $script:FrameworkRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $script:ProfileDirectory = Join-Path -Path $script:FrameworkRoot -ChildPath 'Profile.d'
 $script:FunctionsDirectory = Join-Path -Path $script:FrameworkRoot -ChildPath 'Functions'
