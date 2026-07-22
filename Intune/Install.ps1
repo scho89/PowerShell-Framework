@@ -8,14 +8,17 @@ if (-not (Test-Path -LiteralPath $destinationRoot)) {
     New-Item -Path $destinationRoot -ItemType Directory -Force | Out-Null
 }
 
-Get-ChildItem -Path $sourceRoot -Force | Where-Object { $_.Name -ne '.git' } | ForEach-Object {
+Get-ChildItem -Path $sourceRoot -Force | Where-Object { $_.Name -notin @('.git', 'Version.txt') } | ForEach-Object {
     Copy-Item -Path $_.FullName -Destination $destinationRoot -Recurse -Force
 }
 
 $versionSourcePath = Join-Path -Path $sourceRoot -ChildPath 'Version.txt'
 $versionDestinationPath = Join-Path -Path $destinationRoot -ChildPath 'Version.txt'
 
-if (-not (Test-Path -LiteralPath $versionDestinationPath)) {
+if (Test-Path -LiteralPath $versionSourcePath) {
+    Copy-Item -Path $versionSourcePath -Destination $versionDestinationPath -Force
+}
+else {
     Set-Content -Path $versionDestinationPath -Value '1.0.0' -Encoding UTF8
 }
 
