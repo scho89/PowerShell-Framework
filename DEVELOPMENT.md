@@ -9,6 +9,7 @@
 ## Manual Syntax Validation
 
 ```powershell
+$errors = @()
 Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object {
     [void][System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$errors)
 }

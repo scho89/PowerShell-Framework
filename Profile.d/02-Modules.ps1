@@ -8,5 +8,7 @@ foreach ($moduleName in $optionalModules) {
     try {
         Import-Module -Name $moduleName -ErrorAction Stop
     }
-    catch {}
+    catch {
+        Write-Verbose ("Optional module '{0}' could not be imported." -f $moduleName)
+    }
 }
