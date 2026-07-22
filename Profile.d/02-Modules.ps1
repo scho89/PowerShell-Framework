@@ -9,6 +9,6 @@ foreach ($moduleName in $optionalModules) {
         Import-Module -Name $moduleName -ErrorAction Stop
     }
     catch {
-        Write-Verbose ("Optional module '{0}' could not be imported." -f $moduleName)
+        Write-Verbose ("Optional module '{0}' could not be imported: {1}" -f $moduleName, $_.Exception.Message)
     }
 }

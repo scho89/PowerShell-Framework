@@ -17,8 +17,7 @@ if (-not (Test-Path -LiteralPath $destinationRoot)) {
     'LICENSE',
     'Profile.d',
     'Functions',
-    'Modules',
-    'Intune'
+    'Modules'
 ) | ForEach-Object {
     $sourceItemPath = Join-Path -Path $sourceRoot -ChildPath $_
     if (Test-Path -LiteralPath $sourceItemPath) {
