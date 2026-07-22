@@ -58,7 +58,7 @@ A lightweight user profile can dot-source `CompanyProfile.ps1` from that locatio
 1. Loads all `Profile.d/*.ps1` scripts by filename order.
 2. Loads all `Functions/*.ps1` scripts.
 3. Imports optional custom modules from `Modules/` (`.psd1` and `.psm1`).
-4. Handles missing modules gracefully and logs warnings instead of failing the shell.
+4. Handles missing modules and load errors gracefully without failing the shell.
 
 ## Built-In Initial Features
 

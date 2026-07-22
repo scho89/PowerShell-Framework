@@ -8,8 +8,22 @@ if (-not (Test-Path -LiteralPath $destinationRoot)) {
     New-Item -Path $destinationRoot -ItemType Directory -Force | Out-Null
 }
 
-Get-ChildItem -Path $sourceRoot -Force | Where-Object { $_.Name -notin @('.git', 'Version.txt') } | ForEach-Object {
-    Copy-Item -Path $_.FullName -Destination $destinationRoot -Recurse -Force
+@(
+    'CompanyProfile.ps1',
+    'README.md',
+    'INSTALLATION.md',
+    'DEVELOPMENT.md',
+    'CONTRIBUTING.md',
+    'LICENSE',
+    'Profile.d',
+    'Functions',
+    'Modules',
+    'Intune'
+) | ForEach-Object {
+    $sourceItemPath = Join-Path -Path $sourceRoot -ChildPath $_
+    if (Test-Path -LiteralPath $sourceItemPath) {
+        Copy-Item -Path $sourceItemPath -Destination $destinationRoot -Recurse -Force
+    }
 }
 
 $versionSourcePath = Join-Path -Path $sourceRoot -ChildPath 'Version.txt'
