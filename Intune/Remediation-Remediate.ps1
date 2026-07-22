@@ -3,7 +3,7 @@ param()
 
 <#
 .SYNOPSIS
-    Remediation script for M365-PowerShell-Framework
+    Remediation script for PowerShell-Framework
     Downloads and installs the latest version from GitHub
 
 .DESCRIPTION

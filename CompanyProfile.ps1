@@ -20,7 +20,7 @@ function Write-FrameworkLoadError {
         [System.Management.Automation.ErrorRecord]$ErrorRecord
     )
 
-    Write-Warning ("[M365-PowerShell-Framework] Failed to load '{0}': {1}" -f $Path, $ErrorRecord.Exception.Message)
+    Write-Warning ("[PowerShell-Framework] Failed to load '{0}': {1}" -f $Path, $ErrorRecord.Exception.Message)
 }
 
 function Import-OptionalModules {

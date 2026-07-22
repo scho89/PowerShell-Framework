@@ -1,6 +1,6 @@
-# M365-PowerShell-Framework
+# PowerShell-Framework
 
-M365-PowerShell-Framework is a centralized, version-controlled PowerShell framework for Microsoft 365 support engineers.
+PowerShell-Framework is a centralized, version-controlled PowerShell framework for Microsoft 365 support engineers.
 
 ## Design Goals
 

@@ -123,7 +123,7 @@ $intuneWinUtil = Get-IntuneWinAppUtil -ToolsPath $ToolsPath
 # Build package
 Write-Host "Building Intune package..." -ForegroundColor Green
 
-$packageName = "M365-PowerShell-Framework"
+$packageName = "PowerShell-Framework"
 $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
 
 Write-Host ""

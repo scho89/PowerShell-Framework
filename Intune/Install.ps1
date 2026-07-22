@@ -19,7 +19,7 @@ function Write-Log {
 }
 
 Write-Log "========================================="
-Write-Log "M365-PowerShell-Framework Installation"
+Write-Log "PowerShell-Framework Installation"
 Write-Log "========================================="
 Write-Log "User: $userName"
 Write-Log "PowerShell Version: $($PSVersionTable.PSVersion)"

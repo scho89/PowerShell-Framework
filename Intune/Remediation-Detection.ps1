@@ -3,7 +3,7 @@ param()
 
 <#
 .SYNOPSIS
-    Detection script for M365-PowerShell-Framework Remediation
+    Detection script for PowerShell-Framework Remediation
     Checks if installed version matches the latest GitHub release version
 
 .DESCRIPTION

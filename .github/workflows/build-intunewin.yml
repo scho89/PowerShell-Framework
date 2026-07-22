@@ -46,13 +46,13 @@ jobs:
         shell: pwsh
         run: |
           New-Item -Path output -ItemType Directory -Force | Out-Null
-          Compress-Archive -Path CompanyProfile.ps1,Functions,Profile.d,Modules,Intune,README.md,INSTALLATION.md,DEVELOPMENT.md,CONTRIBUTING.md,Version.txt,LICENSE -DestinationPath output/M365-PowerShell-Framework.zip -Force
+          Compress-Archive -Path CompanyProfile.ps1,Functions,Profile.d,Modules,Intune,README.md,INSTALLATION.md,DEVELOPMENT.md,CONTRIBUTING.md,Version.txt,LICENSE -DestinationPath output/PowerShell-Framework.zip -Force
 
       - name: Upload release archive
         uses: actions/upload-artifact@v4
         with:
-          name: M365-PowerShell-Framework
-          path: output/M365-PowerShell-Framework.zip
+          name: PowerShell-Framework
+          path: output/PowerShell-Framework.zip
 
   build-intunewin-placeholder:
     needs: package-release
@@ -77,11 +77,11 @@ jobs:
       - name: Download release archive
         uses: actions/download-artifact@v4
         with:
-          name: M365-PowerShell-Framework
+          name: PowerShell-Framework
           path: output
 
       - name: Publish release artifact
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${GITHUB_REF#refs/tags/}" output/M365-PowerShell-Framework.zip --title "${GITHUB_REF#refs/tags/}" --notes "Automated release for M365-PowerShell-Framework"
+          gh release create "${GITHUB_REF#refs/tags/}" output/PowerShell-Framework.zip --title "${GITHUB_REF#refs/tags/}" --notes "Automated release for PowerShell-Framework"

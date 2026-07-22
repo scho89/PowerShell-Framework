@@ -19,7 +19,7 @@ function Write-Log {
 }
 
 Write-Log "========================================="
-Write-Log "M365-PowerShell-Framework Uninstallation"
+Write-Log "PowerShell-Framework Uninstallation"
 Write-Log "========================================="
 Write-Log "User: $userName"
 

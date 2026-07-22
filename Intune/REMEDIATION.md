@@ -1,6 +1,6 @@
 # Intune Remediation Scripts - Auto Update
 
-This directory contains scripts for **automatic update and maintenance** of the M365-PowerShell-Framework using Intune's Remediation Scripts feature.
+This directory contains scripts for **automatic update and maintenance** of the PowerShell-Framework using Intune's Remediation Scripts feature.
 
 ## Overview
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This folder contains scripts for deploying and maintaining the M365-PowerShell-Framework through Intune:
+This folder contains scripts for deploying and maintaining the PowerShell-Framework through Intune:
 
 1. **Win32 Package Deployment** - One-time installation via `.intunewin` package
    - Build, package, and deploy the complete framework
@@ -87,7 +87,7 @@ When deployed via Intune:
 3. **Launches IntuneWinAppUtil GUI** with pre-filled paths
 4. **Monitors for output** and renames the package with timestamp
 5. **Saves to output/** directory:
-   - Named as: `M365-PowerShell-Framework_YYYYMMDD-HHMMSS.intunewin`
+   - Named as: `PowerShell-Framework_YYYYMMDD-HHMMSS.intunewin`
 
 ## Output
 

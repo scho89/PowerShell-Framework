@@ -22,7 +22,7 @@ elseif (Test-Path -LiteralPath $frameworkPath) {
     exit 1
 }
 else {
-    Write-Output "M365-PowerShell-Framework not detected."
+    Write-Output "PowerShell-Framework not detected."
     Write-Output "Expected path: $frameworkPath"
     exit 1
 }
