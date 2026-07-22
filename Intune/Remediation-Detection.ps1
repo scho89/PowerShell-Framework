@@ -19,8 +19,12 @@ param()
 
 # ===== CONFIGURATION =====
 # Change these to your GitHub repository details
-$GitHubOwner = "your-github-username"      # TODO: Update with your GitHub username
+$GitHubOwner = "scho89"      # Your GitHub username/organization
 $GitHubRepo = "PowerShell-Framework"
+
+# Optional: GitHub Personal Access Token for private repos or rate limiting
+# Generate at: https://github.com/settings/tokens (requires: public_repo scope)
+# $GitHubToken = "ghp_xxxxxxxxxxxxxxxxxxxx"
 
 # Installation path
 $userProfilePath = $env:USERPROFILE
@@ -60,10 +64,28 @@ try {
 
     # Get latest version from GitHub API
     Write-Log "Checking latest version from GitHub..."
-    $apiUrl = "https://api.github.com/repos/$GitHubOwner/$GitHubRepo/releases/latest"
+    Write-Log "Repository: https://github.com/$GitHubOwner/$GitHubRepo"
     
-    $releaseInfo = Invoke-RestMethod -Uri $apiUrl -ErrorAction Stop
-    $latestVersion = $releaseInfo.tag_name -replace '^v', ''  # Remove 'v' prefix if present
+    $apiUrl = "https://api.github.com/repos/$GitHubOwner/$GitHubRepo/releases/latest"
+    Write-Log "API URL: $apiUrl"
+    
+    try {
+        $releaseInfo = Invoke-RestMethod -Uri $apiUrl -ErrorAction Stop
+    }
+    catch {
+        Write-Log "ERROR: Failed to fetch from GitHub API"
+        Write-Log "Status: $($_.Exception.Response.StatusCode)"
+        Write-Log "Message: $($_.Exception.Message)"
+        Write-Log ""
+        Write-Log "Possible causes:"
+        Write-Log "1. Release not created: Create a GitHub release with git tag"
+        Write-Log "   Command: git tag v1.0.0 && git push origin v1.0.0"
+        Write-Log "2. Wrong GitHub owner/repo: Check \$GitHubOwner and \$GitHubRepo"
+        Write-Log "3. Private repository: Add GitHub token to API headers"
+        Write-Log "4. Network blocked: Check firewall/proxy settings"
+        Write-Log "Assuming update needed due to API error"
+        exit 1
+    }
     
     Write-Log "Latest version: $latestVersion"
 
