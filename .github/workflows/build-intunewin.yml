@@ -23,6 +23,7 @@ jobs:
         run: |
           $errors = @()
           Get-ChildItem -Path . -Recurse -Filter '*.ps1' -File | ForEach-Object {
+            $parseErrors = $null
             $null = [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$parseErrors)
             if ($parseErrors) {
               $errors += $parseErrors
