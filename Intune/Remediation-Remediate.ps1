@@ -96,7 +96,7 @@ try {
     Write-Log "Downloading release..."
     $zipFile = Join-Path -Path $tempDir -ChildPath "release.zip"
     Invoke-WebRequest -Uri $downloadUrl -OutFile $zipFile -ErrorAction Stop
-    Write-Log "✓ Download complete: $zipFile"
+    Write-Log "[OK] Download complete: $zipFile"
 
     # Extract the zip file
     Write-Log "Extracting files..."
@@ -104,7 +104,7 @@ try {
     New-Item -Path $extractPath -ItemType Directory -Force | Out-Null
     
     Expand-Archive -Path $zipFile -DestinationPath $extractPath -ErrorAction Stop
-    Write-Log "✓ Extraction complete"
+    Write-Log "[OK] Extraction complete"
 
     # Find the extracted folder (GitHub creates owner-repo-hash folder)
     $extractedFolder = Get-ChildItem -Path $extractPath -Directory | Select-Object -First 1
@@ -127,7 +127,7 @@ try {
     & $installScript.FullName -ErrorAction Stop
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Log "✓ Installation completed successfully"
+        Write-Log "[OK] Installation completed successfully"
         Write-Log "Updated to version: $latestVersion"
     }
     else {
@@ -135,7 +135,7 @@ try {
     }
 
     Write-Log "========================================="
-    Write-Log "✓ Update completed successfully"
+    Write-Log "[OK] Update completed successfully"
     Write-Log "========================================="
 
     exit 0
@@ -151,6 +151,6 @@ finally {
     if (Test-Path -LiteralPath $tempDir) {
         Write-Log "Cleaning up temporary files..."
         Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
-        Write-Log "✓ Cleanup complete"
+        Write-Log "[OK] Cleanup complete"
     }
 }

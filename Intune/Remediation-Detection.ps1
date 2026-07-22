@@ -91,12 +91,12 @@ try {
 
     # Compare versions
     if ([version]$installedVersion -eq [version]$latestVersion) {
-        Write-Log "✓ Versions match. No remediation needed."
+        Write-Log "[OK] Versions match. No remediation needed."
         Write-Log "========================================="
         exit 0
     }
     else {
-        Write-Log "⚠ Version mismatch detected."
+        Write-Log "[WARNING] Version mismatch detected."
         Write-Log "  Installed: $installedVersion"
         Write-Log "  Latest: $latestVersion"
         Write-Log "Remediation needed: Update available"
