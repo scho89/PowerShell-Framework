@@ -70,7 +70,7 @@ try {
 
     # Verify installation
     if (Test-Path -LiteralPath $versionDestinationPath) {
-        Write-Log "✓ Framework files installed successfully"
+        Write-Log "[OK] Framework files installed successfully"
     }
     else {
         throw "Installation verification failed: Version.txt not found"
@@ -104,17 +104,17 @@ try {
         }
         else {
             Add-Content -Path $userProfile -Value "`n# M365 PowerShell Framework`n$loadCommand" -Encoding UTF8 -ErrorAction Stop
-            Write-Log "✓ Profile updated"
+            Write-Log "[OK] Profile updated"
         }
     }
     else {
         Write-Log "Creating new profile: $userProfile"
         Set-Content -Path $userProfile -Value "# M365 PowerShell Framework`n$loadCommand" -Encoding UTF8 -ErrorAction Stop
-        Write-Log "✓ Profile created"
+        Write-Log "[OK] Profile created"
     }
 
     Write-Log "========================================="
-    Write-Log "✓ Installation completed successfully"
+    Write-Log "[OK] Installation completed successfully"
     Write-Log "Framework path: $destinationRoot"
     Write-Log "Profile: $userProfile"
     Write-Log "Log file: $logFile"

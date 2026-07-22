@@ -42,7 +42,7 @@ try {
             if ($updatedContent -ne $profileContent) {
                 Write-Log "Removing framework load command from profile"
                 Set-Content -Path $userProfile -Value $updatedContent -Encoding UTF8 -ErrorAction Stop
-                Write-Log "✓ Profile cleaned"
+                Write-Log "[OK] Profile cleaned"
             }
             else {
                 Write-Log "Framework not found in profile"
@@ -54,14 +54,14 @@ try {
     if (Test-Path -LiteralPath $destinationRoot) {
         Write-Log "Removing installation directory: $destinationRoot"
         Remove-Item -Path $destinationRoot -Recurse -Force -ErrorAction Stop
-        Write-Log "✓ Installation directory removed"
+        Write-Log "[OK] Installation directory removed"
     }
     else {
         Write-Log "Installation directory not found: $destinationRoot"
     }
 
     Write-Log "========================================="
-    Write-Log "✓ Uninstallation completed successfully"
+    Write-Log "[OK] Uninstallation completed successfully"
     Write-Log "Log file: $logFile"
     Write-Log "========================================="
     

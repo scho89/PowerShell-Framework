@@ -189,7 +189,7 @@ try {
         }
         
         Write-Host ""
-        Write-Host "✓ Package created successfully!" -ForegroundColor Green
+        Write-Host "[OK] Package created successfully!" -ForegroundColor Green
         Write-Host "  Output: $newPath" -ForegroundColor Cyan
         
         $fileSize = (Get-Item $newPath).Length / 1MB
