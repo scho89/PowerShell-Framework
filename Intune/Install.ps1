@@ -15,10 +15,7 @@ Get-ChildItem -Path $sourceRoot -Force | Where-Object { $_.Name -ne '.git' } | F
 $versionSourcePath = Join-Path -Path $sourceRoot -ChildPath 'Version.txt'
 $versionDestinationPath = Join-Path -Path $destinationRoot -ChildPath 'Version.txt'
 
-if (Test-Path -LiteralPath $versionSourcePath) {
-    Copy-Item -Path $versionSourcePath -Destination $versionDestinationPath -Force
-}
-else {
+if (-not (Test-Path -LiteralPath $versionDestinationPath)) {
     Set-Content -Path $versionDestinationPath -Value '1.0.0' -Encoding UTF8
 }
 

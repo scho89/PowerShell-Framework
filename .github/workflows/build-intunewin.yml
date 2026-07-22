@@ -8,6 +8,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: read
+
 jobs:
   validate-powershell:
     runs-on: ubuntu-latest
@@ -53,6 +56,7 @@ jobs:
   build-intunewin-placeholder:
     needs: package-release
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Placeholder Intune Win32 packaging step
         run: echo "Placeholder for IntuneWinAppUtil packaging."
