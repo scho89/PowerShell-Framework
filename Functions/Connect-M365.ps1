@@ -9,8 +9,13 @@ function Connect-M365 {
         )
     )
 
-    $connectExchange = $Exchange -or (-not $Exchange -and -not $Graph)
-    $connectGraph = $Graph -or (-not $Exchange -and -not $Graph)
+    $connectExchange = $Exchange
+    $connectGraph = $Graph
+
+    if (-not $Exchange -and -not $Graph) {
+        $connectExchange = $true
+        $connectGraph = $true
+    }
 
     if ($connectExchange) {
         Connect-Exchange
