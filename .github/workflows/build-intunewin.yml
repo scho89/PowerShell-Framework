@@ -1,0 +1,87 @@
+name: Build Intune Package
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-powershell:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: PowerShell syntax validation
+        shell: pwsh
+        run: |
+          $errors = @()
+          Get-ChildItem -Path . -Recurse -Filter '*.ps1' -File | ForEach-Object {
+            $parseErrors = $null
+            $null = [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$parseErrors)
+            if ($parseErrors) {
+              $errors += $parseErrors
+            }
+          }
+
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            throw 'PowerShell syntax validation failed.'
+          }
+
+  package-release:
+    needs: validate-powershell
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create release archive
+        shell: pwsh
+        run: |
+          New-Item -Path output -ItemType Directory -Force | Out-Null
+          Compress-Archive -Path CompanyProfile.ps1,Functions,Profile.d,Modules,Intune,README.md,INSTALLATION.md,DEVELOPMENT.md,CONTRIBUTING.md,Version.txt,LICENSE -DestinationPath output/M365-PowerShell-Framework.zip -Force
+
+      - name: Upload release archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: M365-PowerShell-Framework
+          path: output/M365-PowerShell-Framework.zip
+
+  build-intunewin-placeholder:
+    needs: package-release
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Placeholder Intune Win32 packaging step
+        run: echo "Placeholder for IntuneWinAppUtil packaging."
+
+  publish-on-tags:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - package-release
+      - build-intunewin-placeholder
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download release archive
+        uses: actions/download-artifact@v4
+        with:
+          name: M365-PowerShell-Framework
+          path: output
+
+      - name: Publish release artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${GITHUB_REF#refs/tags/}" output/M365-PowerShell-Framework.zip --title "${GITHUB_REF#refs/tags/}" --notes "Automated release for M365-PowerShell-Framework"
