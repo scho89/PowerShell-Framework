@@ -71,6 +71,7 @@ try {
     
     try {
         $releaseInfo = Invoke-RestMethod -Uri $apiUrl -ErrorAction Stop
+        $latestVersion = $releaseInfo.tag_name -replace '^v', ''  # Remove 'v' prefix if present
     }
     catch {
         Write-Log "ERROR: Failed to fetch from GitHub API"
