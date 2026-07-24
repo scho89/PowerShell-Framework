@@ -1,4 +1,4 @@
-function Show-Matrix {
+﻿function Show-Matrix {
     [CmdletBinding()]
     param(
         [ValidateRange(1, 1000)]

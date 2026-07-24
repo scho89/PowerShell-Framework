@@ -35,33 +35,36 @@ function Import-OptionalModules {
     }
 
     Get-ChildItem -Path $Path -Recurse -File | Where-Object { $_.Extension -in @('.psd1', '.psm1') } | Sort-Object -Property FullName | ForEach-Object {
+        $moduleFile = $_.FullName
         try {
-            Import-Module -Name $_.FullName -ErrorAction Stop
+            Import-Module -Name $moduleFile -ErrorAction Stop
         }
         catch {
-            Write-FrameworkLoadError -Path $_.FullName -ErrorRecord $_
+            Write-FrameworkLoadError -Path $moduleFile -ErrorRecord $_
         }
     }
 }
 
 if (Test-Path -LiteralPath $script:ProfileDirectory) {
     Get-ChildItem -Path $script:ProfileDirectory -Filter '*.ps1' -File | Sort-Object -Property Name | ForEach-Object {
+        $profileFile = $_.FullName
         try {
-            . $_.FullName
+            . $profileFile
         }
         catch {
-            Write-FrameworkLoadError -Path $_.FullName -ErrorRecord $_
+            Write-FrameworkLoadError -Path $profileFile -ErrorRecord $_
         }
     }
 }
 
 if (Test-Path -LiteralPath $script:FunctionsDirectory) {
     Get-ChildItem -Path $script:FunctionsDirectory -Filter '*.ps1' -File | Sort-Object -Property Name | ForEach-Object {
+        $functionFile = $_.FullName
         try {
-            . $_.FullName
+            . $functionFile
         }
         catch {
-            Write-FrameworkLoadError -Path $_.FullName -ErrorRecord $_
+            Write-FrameworkLoadError -Path $functionFile -ErrorRecord $_
         }
     }
 }
